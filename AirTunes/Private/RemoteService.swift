@@ -88,8 +88,8 @@ class RemoteService: NSObject, GCDAsyncSocketDelegate, RemoteLocatorDelegate {
         connectToRemote()
     }
 
-    func socket(_ sock: GCDAsyncSocket!,
-                didConnectToHost host: String!, port: UInt16) {
+	func socket(_ sock: GCDAsyncSocket,
+				didConnectToHost host: String, port: UInt16) {
         // Retry pending request if we successfully connect
         if !request.isEmpty { sendRequest() }
     }

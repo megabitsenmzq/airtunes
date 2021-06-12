@@ -37,15 +37,15 @@ class RTSPSession: NSObject, GCDAsyncSocketDelegate {
         tcpSockets.append(socket)
     }
 
-    func socket(_ sock: GCDAsyncSocket!,
-                didAcceptNewSocket newSocket: GCDAsyncSocket!) {
+	func socket(_ sock: GCDAsyncSocket,
+				didAcceptNewSocket newSocket: GCDAsyncSocket) {
         tcpSockets.append(newSocket)
         let packetEnd = "\r\n\r\n".data(using: .utf8)!
         newSocket.readData(to: packetEnd, withTimeout: 30, tag: rtspTag)
     }
 
-    func socket(_ sock: GCDAsyncSocket!,
-                didRead data: Data!, withTag tag: Int) {
+	func socket(_ sock: GCDAsyncSocket,
+				didRead data: Data, withTag tag: Int) {
         guard let type = registry.contentType(for: tag) else { return }
         switch type {
             case "application/rtsp":
@@ -63,7 +63,7 @@ class RTSPSession: NSObject, GCDAsyncSocketDelegate {
         }
     }
 
-    func socket(_ sock: GCDAsyncSocket!, shouldTimeoutReadWithTag tag: Int,
+	func socket(_ sock: GCDAsyncSocket, shouldTimeoutReadWithTag tag: Int,
                 elapsed: TimeInterval, bytesDone length: UInt) -> TimeInterval {
         #if DEBUG
             print("Connection timed out")
@@ -155,7 +155,7 @@ class RTSPSession: NSObject, GCDAsyncSocketDelegate {
                                 from sock: GCDAsyncSocket) -> String {
         var responseData = Data(base64Encoded: challenge)!
         responseData.append(sock.internetAddress)
-        responseData.append(Data(bytes: manager.hardwareAddress))
+        responseData.append(Data(manager.hardwareAddress))
         while responseData.count < 32 { responseData.append(0) }
         let signedResponse = manager.sign(responseData)
         return signedResponse.base64EncodedString()
@@ -186,6 +186,7 @@ class RTSPSession: NSObject, GCDAsyncSocketDelegate {
     private func handleParameterData(_ data: Data) {
         let parsed = ParameterParser(data: data)!.parse()
         manager.updateTrackInfo(withKeyedValues: parsed)
+        manager.updatePlayerInfo(withKeyedValues: parsed)
     }
 
     private func handleDAAPData(_ data: Data) {

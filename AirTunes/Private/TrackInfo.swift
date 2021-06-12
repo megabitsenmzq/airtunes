@@ -16,12 +16,12 @@ import Cocoa
 import ABPlayerInterface
 
 class TrackInfo: NSObject, ABTrackInfo {
-    dynamic var name = ""
-    dynamic var album = ""
-    dynamic var artist = ""
-    dynamic var position = -1.0
-    dynamic var duration = -1.0
-    dynamic var artwork = NSImage()
+    @objc dynamic var name = ""
+    @objc dynamic var album = ""
+    @objc dynamic var artist = ""
+    @objc dynamic var position = -1.0
+    @objc dynamic var duration = -1.0
+    @objc dynamic var artwork = NSImage()
 
     func reset() {
         name = ""

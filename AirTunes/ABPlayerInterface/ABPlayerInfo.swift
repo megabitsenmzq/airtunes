@@ -14,19 +14,11 @@
 
 import Foundation
 
-extension GCDAsyncSocket {
-    var internetAddress: Data! {
-        let address = self.localAddress!
-        if isIPv6 {
-            // Takes advantage of the data alignment in
-            // `sockaddr_in6` to avoid messy castings
-            let alignmentRange = 8..<24
-            return address.subdata(in: alignmentRange)
-        }
-        else {
-            // Same as above but with `sockaddr_in`
-            let alignmentRange = 4..<8
-            return address.subdata(in: alignmentRange)
-        }
-    }
+/// Types conforming to the `ABPlayerInfo` protocol enable access to the state
+/// of the audio player.
+public protocol ABPlayerInfo {
+    /// Whether audio is currently playing.
+    var isPlaying: Bool { get }
+    /// The audio volume for the player.
+    var volume: Double { get }
 }

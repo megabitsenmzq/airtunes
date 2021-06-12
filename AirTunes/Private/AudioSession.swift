@@ -91,10 +91,8 @@ class AudioSession {
 
     private func setMagicCookie(for queue: AudioQueueRef) {
         let magicCookie = Data(base64Encoded: StreamProperties.magicCookie)!
-        _ = magicCookie.withUnsafeBytes {
-            AudioQueueSetProperty(queue, kAudioQueueProperty_MagicCookie,
-                                  $0, UInt32(magicCookie.count))
-        }
+		AudioQueueSetProperty(queue, kAudioQueueProperty_MagicCookie,
+                                  [UInt8](magicCookie), UInt32(magicCookie.count))
     }
 
     private func createAudioBuffers(for queue: AudioQueueRef, count: Int) {
@@ -225,10 +223,8 @@ class AudioSession {
                              to buffer: AudioQueueBufferRef,
                              index: Int, offset: Int) {
         let packetSize = packet.payloadData.count
-        packet.payloadData.withUnsafeBytes {
-            buffer.pointee.mAudioData.advanced(by: offset).copyBytes(
-                from: $0, count: packetSize)
-        }
+		buffer.pointee.mAudioData.advanced(by: offset).copyMemory(
+                from: [UInt8](packet.payloadData), byteCount: packetSize)
         let packetDescriptions = buffer.pointee.mPacketDescriptions
         packetDescriptions?[index].mStartOffset = Int64(offset)
         packetDescriptions?[index].mDataByteSize = UInt32(packetSize)

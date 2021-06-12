@@ -29,10 +29,10 @@ class RTPSession: NSObject, GCDAsyncUdpSocketDelegate {
         self.manager = manager
     }
 
-    func udpSocket(_ sock: GCDAsyncUdpSocket!,
-                   didReceive data: Data!,
-                   fromAddress address: Data!,
-                   withFilterContext filterContext: Any!) {
+	func udpSocket(_ sock: GCDAsyncUdpSocket,
+				   didReceive data: Data,
+				   fromAddress address: Data,
+				   withFilterContext filterContext: Any?) {
         if sock.localPort() == RTPSessionConstants.controlPort {
             controlAddress = address
         }
@@ -106,9 +106,9 @@ class RTPSession: NSObject, GCDAsyncUdpSocketDelegate {
         var sequenceNumber = sequenceNumber.bigEndian
         var count = UInt16(count).bigEndian
         let rtpHeader: [UInt8] = [128, 213, 0, 1]
-        var request = Data(bytes: rtpHeader)
-        request.append(UnsafeBufferPointer(start: &sequenceNumber, count: 1))
-        request.append(UnsafeBufferPointer(start: &count, count: 1))
+        var request = Data(rtpHeader)
+        withUnsafePointer(to: &sequenceNumber) { request.append(UnsafeBufferPointer(start: $0, count: 1)) }
+        withUnsafePointer(to: &count) { request.append(UnsafeBufferPointer(start: $0, count: 1)) }
         controlSocket.send(
             request, toAddress: controlAddress!, withTimeout: 5, tag: 0)
     }

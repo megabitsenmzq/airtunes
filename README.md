@@ -15,12 +15,6 @@ Instructions
 ------------
 Drag `AirTunes.xcodeproj` into the Project Navigator of your app's Xcode project. Then open your app target's "General" configuration page. In the "Embedded Binaries" section, click the `+` icon and select `AirTunes.framework`.
 
-Dependencies
-------------
-AirTunes depends on the `ABPlayerInterface` framework, which is part of the ABPlayerController project. Follow the instructions on the project page to install the framework:
-
-[https://github.com/jenghis/abplayercontroller](https://github.com/jenghis/abplayercontroller)
-
 Usage
 -----
 Create an `AirTunes` instance and call `start()` to start the server. Playback can be monitored and controlled using the methods described by the `ABPlayerService` protocol. 

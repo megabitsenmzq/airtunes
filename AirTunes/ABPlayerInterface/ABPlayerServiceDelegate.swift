@@ -14,19 +14,13 @@
 
 import Foundation
 
-extension GCDAsyncSocket {
-    var internetAddress: Data! {
-        let address = self.localAddress!
-        if isIPv6 {
-            // Takes advantage of the data alignment in
-            // `sockaddr_in6` to avoid messy castings
-            let alignmentRange = 8..<24
-            return address.subdata(in: alignmentRange)
-        }
-        else {
-            // Same as above but with `sockaddr_in`
-            let alignmentRange = 4..<8
-            return address.subdata(in: alignmentRange)
-        }
-    }
+/// The `ABPlayerServiceDelegate` handles changes in the track metadata or the
+/// player state.
+public protocol ABPlayerServiceDelegate {
+    /// The method called when the track info changes.
+    func playerService(_ playerService: ABPlayerService,
+                       didChangeTrackInfo trackInfo: ABTrackInfo)
+    /// The method called when the player info changes.
+    func playerService(_ playerService: ABPlayerService,
+                       didChangePlayerInfo playerInfo: ABPlayerInfo)
 }

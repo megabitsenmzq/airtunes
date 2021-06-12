@@ -27,11 +27,11 @@ extension String {
         let pattern = try! NSRegularExpression(pattern: pattern)
         guard let match = pattern.firstMatch(
             in: self, range: NSRange(
-                location: 0, length: utf8.count)) else { return nil }
+                location: 0, length: count)) else { return nil }
         var captureGroups = [String]()
         for i in 0..<match.numberOfRanges {
             captureGroups.append((self as NSString).substring(
-                with: match.rangeAt(i)))
+                with: match.range(at: i)))
         }
         return captureGroups[group]
     }

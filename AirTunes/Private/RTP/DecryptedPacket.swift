@@ -38,21 +38,12 @@ class DecryptedPacket: RTPPacket, CustomDebugStringConvertible {
         let length = payloadData.count
         var output = [UInt8](repeating: 0, count: length)
         var moved = 0
-        key.withUnsafeBytes { (keyBytes: UnsafePointer<UInt8>) -> Void in
-            iv.withUnsafeBytes { (ivBytes: UnsafePointer<UInt8>) -> Void in
-                CCCryptorCreate(
-                    UInt32(kCCDecrypt), 0, 0, keyBytes, 16, ivBytes, &cryptor)
-            }
-        }
-        _ = payloadData.withUnsafeBytes {
-            CCCryptorUpdate(
-                cryptor, $0, length, &output, output.count, &moved
-            )
-        }
-        var decrypted = Data(bytes: output[0..<moved])
+		CCCryptorCreate(UInt32(kCCDecrypt), 0, 0, [UInt8](key), 16, [UInt8](iv), &cryptor)
+		CCCryptorUpdate(cryptor, [UInt8](payloadData), length, &output, output.count, &moved)
+        var decrypted = Data(output[0..<moved])
 
         // Remaining data is plain-text
-        let remaining = Range(decrypted.count..<length)
+        let remaining = decrypted.count..<length
         decrypted.append(payloadData.subdata(in: remaining))
 
         CCCryptorRelease(cryptor)

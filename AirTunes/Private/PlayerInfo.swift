@@ -16,8 +16,8 @@ import Foundation
 import ABPlayerInterface
 
 class PlayerInfo: NSObject, ABPlayerInfo {
-    dynamic var isPlaying = false
-    dynamic var volume = -30.0
+    @objc dynamic var isPlaying = false
+    @objc dynamic var volume = -30.0
 
     func update(withKeyedValues keyedValues: [String: AnyHashable]) {
         setValuesForKeys(keyedValues)
