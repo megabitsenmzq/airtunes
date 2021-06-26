@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import Foundation
-import ABPlayerInterface
 
 /// The `AirTunes` class creates a server that AirPlay clients may connect and
 /// stream audio to.

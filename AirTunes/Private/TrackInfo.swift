@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import Cocoa
-import ABPlayerInterface
 
 class TrackInfo: NSObject, ABTrackInfo {
     @objc dynamic var name = ""

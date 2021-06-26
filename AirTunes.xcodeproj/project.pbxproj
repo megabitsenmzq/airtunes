@@ -70,8 +70,6 @@
 		8489E7141E52B7E900DFDC64 /* AirTunes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AirTunes.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		8489E7151E52B7E900DFDC64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8489E7351E52B85600DFDC64 /* PrivateKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PrivateKey.pem; sourceTree = "<group>"; };
-		8489E7781E52BD6A00DFDC64 /* ABProtocols.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ABProtocols.framework; path = "../../Library/Developer/Xcode/DerivedData/AirBass-copfgxgldfplacgypfcteepohutk/Build/Products/Debug/ABProtocols.framework"; sourceTree = "<group>"; };
-		8489E7EA1E53A35D00DFDC64 /* ABPlayerInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ABPlayerInterface.framework; path = ../workspace/ABPlayerInterface/build/Debug/ABPlayerInterface.framework; sourceTree = "<group>"; };
 		84C2B2D21E5817630039EC0C /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
 		84C2B2D31E5817630039EC0C /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		84C2B2D41E5817630039EC0C /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
@@ -171,7 +169,6 @@
 			isa = PBXGroup;
 			children = (
 				8489E7131E52B7E900DFDC64 /* AirTunes */,
-				8489E7771E52BD6A00DFDC64 /* Frameworks */,
 				8489E7121E52B7E900DFDC64 /* Products */,
 				84C2B2FC1E5AC02B0039EC0C /* LICENSE */,
 				84C2B2FB1E5AC02B0039EC0C /* README.md */,
@@ -198,15 +195,6 @@
 				8489E7351E52B85600DFDC64 /* PrivateKey.pem */,
 			);
 			path = AirTunes;
-			sourceTree = "<group>";
-		};
-		8489E7771E52BD6A00DFDC64 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				8489E7EA1E53A35D00DFDC64 /* ABPlayerInterface.framework */,
-				8489E7781E52BD6A00DFDC64 /* ABProtocols.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C04A0B332674E6D2009CBA0D /* ABPlayerInterface */ = {

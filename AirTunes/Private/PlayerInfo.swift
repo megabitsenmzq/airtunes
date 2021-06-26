@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import Foundation
-import ABPlayerInterface
 
 class PlayerInfo: NSObject, ABPlayerInfo {
     @objc dynamic var isPlaying = false
