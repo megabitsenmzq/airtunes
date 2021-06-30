@@ -244,8 +244,7 @@ class AudioSession {
                                     errorCode: Int? = nil) {
         // Make buffer available for reuse
         playerState.buffers.append(buffer)
-        let hasAvailableBuffer = (
-            playerState.buffers.count < playerState.bufferCount)
+        let hasAvailableBuffer = playerState.buffers.count < playerState.bufferCount
         if !hasAvailableBuffer { resetPlaybackState(for: queue) }
         #if DEBUG
             printDebugInfo()
@@ -255,8 +254,8 @@ class AudioSession {
 
     private func resetPlaybackState(for queue: AudioQueueRef) {
         playerState.isPlaying = false
-        AudioQueuePause(queue)
-        playerState.readIndex = playerState.writeIndex
+//        AudioQueuePause(queue)
+//        playerState.readIndex = playerState.writeIndex
     }
 }
 
